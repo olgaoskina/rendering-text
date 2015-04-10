@@ -5,6 +5,8 @@
 
 /* @(#) $Id: adler32.c,v 1.8 2012/02/05 18:10:25 drolon Exp $ */
 
+
+
 #include "zutil.h"
 
 #define local static
@@ -60,6 +62,17 @@ local uLong adler32_combine_ OF((uLong adler1, uLong adler2, z_off64_t len2));
 #  define MOD28(a) a %= BASE
 #  define MOD63(a) a %= BASE
 #endif
+
+
+
+
+
+// *********************************
+char* fromZLib() {
+	return "From ZLib";
+}
+// *********************************
+
 
 /* ========================================================================= */
 uLong ZEXPORT adler32(adler, buf, len)

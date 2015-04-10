@@ -16,7 +16,7 @@ OBJS= \
     zutil.o \
 
 STATIC_OBJS=$(OBJS:%.o=%.static.o)
-DYNAIC_OBJS=$(OBJS:%.o=%.dynamic.o)
+DYNAMIC_OBJS=$(OBJS:%.o=%.dynamic.o)
 
 INCS= -I. $(INC)
 
@@ -31,22 +31,22 @@ NAME_LIB=libz
 STATIC_LIB=$(NAME_LIB).a
 DYNAMIC_LIB=$(NAME_LIB).so
 
-all: clean $(STATIC_LIB) $(DYNAMIC_LIB)
+all: clean $(STATIC_LIB) 
 
 $(STATIC_LIB):$(STATIC_OBJS)
 	$(AR) $(AR_FLAGS) $@ $(STATIC_OBJS)
 	$(RANLIB) $@
 
 %.static.o : %.c
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(DYNAMIC_LIB):$(DYNAIC_OBJS)
+$(DYNAMIC_LIB):$(DYNAMIC_OBJS)
 	$(CC) -shared -o $@ $<
 
-%.static.o : %.c
-	$(CC) -fpic $(CFLAGS) -c $<
+%.dynamic.o : %.c
+	$(CC) -fpic $(CFLAGS) -c $< -o $@
 
 clean: 
 	rm -f $(STATIC_OBJS)
-	rm -f $(DYNAIC_OBJS)
+	rm -f $(DYNAMIC_OBJS)
 	rm -f $(STATIC_LIB)
