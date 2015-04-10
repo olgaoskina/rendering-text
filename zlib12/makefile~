@@ -43,7 +43,7 @@ $(STATIC_LIB):$(STATIC_OBJS)
 $(DYNAMIC_LIB):$(DYNAMIC_OBJS)
 	$(CC) -shared -o $@ $<
 
-%.dymanic.o : %.c
+%.dynamic.o : %.c
 	$(CC) -fpic $(CFLAGS) -c $< -o $@
 
 clean: 

@@ -15,7 +15,7 @@
 
 int main(int argc, char **argv) {
 	verbose = 1;
-	load_module("libz.so");
+	load_module("../zlib12/libz.so");
 	char* (*fun)(void) = resolve_symbol(NULL, "fromZLib");
 	printf("%s\n", (*fun)());
   return 0;

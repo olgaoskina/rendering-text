@@ -49,13 +49,13 @@ $(STATIC_LIB):$(STATIC_OBJS)
 	$(RANLIB) $@
 
 %.static.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(INCS) $(CFLAGS) -c $< -o $@
 
 $(DYNAMIC_LIB):$(DYNAMIC_OBJS)
 	$(CC) -shared -o $@ $<
 
 %.dynamic.o : %.c
-	$(CC) -fpic $(CFLAGS) -c $< -o $@
+	$(CC) $(INCS) -fpic $(CFLAGS) -c $< -o $@
 
 clean: 
 	rm -f $(STATIC_OBJS)

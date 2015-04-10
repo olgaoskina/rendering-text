@@ -50,3 +50,5 @@ clean:
 	rm -f $(STATIC_OBJS)
 	rm -f $(DYNAMIC_OBJS)
 	rm -f $(STATIC_LIB)
+	rm -f $(DYNAMIC_LIB)
+

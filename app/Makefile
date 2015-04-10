@@ -1,7 +1,7 @@
 NAME-STATIC=render_text-static-DONE
 NAME-DYNAMIC=render_text-dynamic
 
-LDFLAGS_A=-L$(ZLIB_PATH) -L $(PNGLIB_PATH) -L$(FREETYPELIB_PATH) -lpng -lfreetype -lm -lz 
+LDFLAGS_A=-L$(ZLIB_PATH) -L $(PNGLIB_PATH) -L$(FREETYPELIB_PATH) -lfreetype -lm -lpng -lz
 LDFLAGS_D=-L$(ELF_PATH) -ldl -lelf
 
 CC=gcc
@@ -37,13 +37,12 @@ zlib-static:
 	make -C $(ZLIB_PATH) $(ZLIB_STATIC_LIB)
 
 $(NAME-STATIC): $(NAME-STATIC).o
-	$(CC) -o $@ $(CFLAGS) $<  $(LDFLAGS_A)
+	$(CC) $<  $(LDFLAGS_A) -o $@
 
 $(NAME-STATIC).o: $(NAME-STATIC).c
-	$(CC) $(INCS) -c -o $@ $<
+	$(CC) $(CFLAGS) $(INCS) -c -o $@ $<
 
 dynamic: zlib-dynamic pnglib-dynamic freetype-dynamic  $(NAME-DYNAMIC)
-#dynamic: zlib-dynamic  $(NAME-DYNAMIC)
 
 freetype-dynamic: 
 	make -C $(FREETYPELIB_PATH) $(FREETYPELIB_DYNAMIC_LIB)
