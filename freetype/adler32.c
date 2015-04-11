@@ -17,6 +17,15 @@
 #define DO8(buf,i)  DO4(buf,i); DO4(buf,i+4);
 #define DO16(buf)   DO8(buf,0); DO8(buf,8);
 
+
+//####################################
+char* fromFreetype(int i) {
+	printf("IN FREETYPE: %d\n", i);
+	return "From Freetype: ";
+}
+
+//####################################
+
 /* ========================================================================= */
 ZEXPORT(uLong) adler32( /* adler, buf, len) */
     uLong adler,

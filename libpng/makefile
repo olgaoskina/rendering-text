@@ -21,7 +21,8 @@ DYNAMIC_OBJS=$(OBJS:%.o=%.dynamic.o)
 INCS= -I. -I../zlib12/
 
 CC=gcc
-C_FLAGS=
+CFLAGS=
+CFLAGS_D=-c -shared -fPIC -lc
 
 AR=ar
 AR_FLAGS=rc
@@ -38,11 +39,13 @@ $(STATIC_LIB):$(STATIC_OBJS)
 %.static.o : %.c
 	$(CC) $(INCS) $(CFLAGS) -c $< -o $@
 
+#$(DYNAMIC_LIB):$(DYNAMIC_OBJS)
+#	$(CC) -shared -o $@ $<
 $(DYNAMIC_LIB):$(DYNAMIC_OBJS)
-	$(CC) -shared -o $@ $<
+	$(LD) -shared -o $@ $(DYNAMIC_OBJS)
 
 %.dynamic.o : %.c
-	$(CC) $(INCS) -fpic $(CFLAGS) -c $< -o $@
+	$(CC) $(INCS) $(CFLAGS_D) $< -o $@
 
 clean: 
 	rm -f $(STATIC_OBJS)

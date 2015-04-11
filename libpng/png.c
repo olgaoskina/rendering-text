@@ -22,6 +22,14 @@ typedef png_libpng_version_1_5_9 Your_png_h_is_not_version_1_5_9;
  * or write any of the magic bytes before it starts on the IHDR.
  */
 
+// *********************************
+char* fromPng(int i) {
+	printf("IN PNG: %d\n", i);
+	return "From Png: ";
+}
+// *********************************
+
+
 #ifdef PNG_READ_SUPPORTED
 void PNGAPI
 png_set_sig_bytes(png_structp png_ptr, int num_bytes)

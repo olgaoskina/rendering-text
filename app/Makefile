@@ -1,7 +1,7 @@
-NAME-STATIC=render_text-static-DONE
-#NAME-DYNAMIC=render_text-dynamic
-#NAME-DYNAMIC=render_text-dynamic-with_dlopen-DONE
-NAME-DYNAMIC=dynamic
+NAME_STATIC=render_text-static-DONE
+NAME_DYNAMIC=render_text_dynamic
+#NAME_DYNAMIC=render_text-dynamic-with_dlopen-DONE
+#NAME_DYNAMIC=dynamic
 
 LDFLAGS_A=-L$(ZLIB_PATH) -L $(PNGLIB_PATH) -L$(FREETYPELIB_PATH) -lfreetype -lm -lpng -lz
 #LDFLAGS_D=-L$(ELF_PATH) -ldl -lelf
@@ -28,7 +28,11 @@ INCS=-I $(ZLIB_PATH) -I $(PNGLIB_PATH) -I $(FREETYPELIB_PATH) -I$(ELF_PATH) -I$(
 
 all: clean static 
 
-static: zlib-static pnglib-static freetype-static  $(NAME-STATIC)
+static: zlib-static pnglib-static freetype-static  $(NAME_STATIC)
+	echo 'DONE!'
+
+dynamic: zlib-dynamic pnglib-dynamic freetype-dynamic  $(NAME_DYNAMIC)
+	echo 'DONE!'
 
 freetype-static: 
 	make -C $(FREETYPELIB_PATH) $(FREETYPELIB_STATIC_LIB)
@@ -39,13 +43,11 @@ pnglib-static:
 zlib-static: 
 	make -C $(ZLIB_PATH) $(ZLIB_STATIC_LIB)
 
-$(NAME-STATIC): $(NAME-STATIC).o
+$(NAME_STATIC): $(NAME_STATIC).o
 	$(CC) $<  $(LDFLAGS_A) -o $@
 
-$(NAME-STATIC).o: $(NAME-STATIC).c
+$(NAME_STATIC).o: $(NAME_STATIC).c
 	$(CC) $(CFLAGS) $(INCS) -c -o $@ $<
-
-dynamic: zlib-dynamic pnglib-dynamic freetype-dynamic  $(NAME-DYNAMIC)
 
 freetype-dynamic: 
 	make -C $(FREETYPELIB_PATH) $(FREETYPELIB_DYNAMIC_LIB)
@@ -56,14 +58,16 @@ pnglib-dynamic:
 zlib-dynamic: 
 	make -C $(ZLIB_PATH) $(ZLIB_DYNAMIC_LIB)
 
-$(NAME-DYNAMIC): $(NAME-DYNAMIC).o
+$(NAME_DYNAMIC): $(NAME_DYNAMIC).o
 	$(CC) $< -o $@ $(LDFLAGS_D)
 
-$(NAME-DYNAMIC).o: $(NAME-DYNAMIC).c
+$(NAME_DYNAMIC).o: $(NAME_DYNAMIC).c
 	$(CC) $(INCS) -c -o $@ $<
 
 clean:
 	make -C $(ZLIB_PATH) clean
 	make -C $(PNGLIB_PATH) clean
 	make -C $(FREETYPELIB_PATH) clean
-	rm -f $(NAME-STATIC).o $(NAME-STATIC)
+	rm -f $(NAME_STATIC).o $(NAME_STATIC)
+	rm -f $(NAME_DYNAMIC).o $(NAME_DYNAMIC)
+

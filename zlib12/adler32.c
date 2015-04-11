@@ -68,8 +68,9 @@ local uLong adler32_combine_ OF((uLong adler1, uLong adler2, z_off64_t len2));
 
 
 // *********************************
-char* fromZLib() {
-	return "From ZLib";
+char* fromZLib(int i) {
+	printf("IN ZLIB: %d\n", i);
+	return "From ZLib: ";
 }
 // *********************************
 
