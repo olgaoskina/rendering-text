@@ -14,10 +14,16 @@
 #define HEIGHT  200   // Height of png-image
 
 //char* fromZLib();	
+FT_Error (*FT_Init_FreeType1)( FT_Library  * );
+char* (*fun)(void);
 
 int main(int argc, char **argv) {
-	void* handle = dlopen("../zlib12/libz.so",RTLD_LAZY);
-	char*(*fun)(void) = dlsym(handle,"fromZLib");
+		FT_Library     library;
+
+	void* handle = dlopen("../freetype/libfreetype.so",RTLD_LAZY);
+//	FT_Init_FreeType1 = dlsym(handle,"FT_Init_FreeType");
+	fun = dlsym(handle,"from_freetype");
+	printf("%s\n", dlerror());
 	printf("%s\n", (*fun)());
 	dlclose(handle);
   return 0;

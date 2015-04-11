@@ -1,8 +1,11 @@
 NAME-STATIC=render_text-static-DONE
-NAME-DYNAMIC=render_text-dynamic
+#NAME-DYNAMIC=render_text-dynamic
+#NAME-DYNAMIC=render_text-dynamic-with_dlopen-DONE
+NAME-DYNAMIC=dynamic
 
 LDFLAGS_A=-L$(ZLIB_PATH) -L $(PNGLIB_PATH) -L$(FREETYPELIB_PATH) -lfreetype -lm -lpng -lz
-LDFLAGS_D=-L$(ELF_PATH) -ldl -lelf
+#LDFLAGS_D=-L$(ELF_PATH) -ldl -lelf
+LDFLAGS_D=-ldl
 
 CC=gcc
 CFLAGS= -W -Wall -O3 -funroll-loops -g -DPNG_DEBUG=5
